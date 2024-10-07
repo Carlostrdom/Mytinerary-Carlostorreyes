@@ -1,0 +1,13 @@
+@tailwind components;
+
+@tailwind utilities;
+
+@tailwind base;
+
+@layer utilities {
+  .imgbg {
+    background-image: url("./assets/image/top-view.jpg");
+
+    /* Esta línea establece la imagen de fondo */
+  }
+}
