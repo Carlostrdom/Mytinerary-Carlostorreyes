@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
@@ -39,7 +39,6 @@ const CarouselComponent = () => {
       image:
         "https://cdn.britannica.com/45/196945-050-CCF8BD72/Temple-of-Saturn-Arch-Septimius-Severus-Forum.jpg",
     },
-    { name: "Barcelona", image: "https://img2.rtve.es/v/868498/?w=1600" },
     {
       name: "Moscow",
       image: "https://media.timeout.com/images/105237890/750/422/image.jpg",
@@ -49,10 +48,11 @@ const CarouselComponent = () => {
       image:
         "https://www.kayak.com.co/rimg/dimg/85/e5/d763bad9-city-9087-164429be177.jpg?width=1366&height=768&xhint=2760&yhint=1285&crop=true",
     },
+    { name: "Barcelona", image: "https://img2.rtve.es/v/868498/" },
     {
       name: "Rio de Janeiro",
       image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSYPg08WS5RDmGAIsQEQQEqShrZAV5AiPE5wQ&s",
+        "https://images.unsplash.com/photo-1518639192441-8fce0a366e2e?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
     },
     {
       name: "Venezuela",
@@ -60,26 +60,52 @@ const CarouselComponent = () => {
     },
   ];
 
+  const [itemsPerGroup, setItemsPerGroup] = useState(4);
+
+  useEffect(() => {
+    const updateItemsPerGroup = () => {
+      const width = window.innerWidth;
+      if (width < 640) {
+        setItemsPerGroup(1);
+      } else if (width < 1024) {
+        setItemsPerGroup(2);
+      } else {
+        setItemsPerGroup(4);
+      }
+    };
+
+    updateItemsPerGroup();
+    window.addEventListener("resize", updateItemsPerGroup);
+
+    return () => window.removeEventListener("resize", updateItemsPerGroup);
+  }, []);
+
+  // Agrupar ciudades de acuerdo con itemsPerGroup
   const groupedCities = [];
-  for (let i = 0; i < cities.length; i += 4) {
-    groupedCities.push(cities.slice(i, i + 4));
+  for (let i = 0; i < cities.length; i += itemsPerGroup) {
+    groupedCities.push(cities.slice(i, i + itemsPerGroup));
   }
 
   return (
-    <Carousel autoPlay interval={3000} infiniteLoop showThumbs={false}>
+    <Carousel autoPlay interval={2000} infiniteLoop showThumbs={false}>
       {groupedCities.map((group, index) => (
         <div
           key={index}
-          className="grid bg-slate-500 grid-cols-2 gap-2 p-4 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-2"
+          className={`grid  gap-2 p-4 ${
+            itemsPerGroup === 1 ? "grid-cols-1" : "grid-cols-2 md:grid-cols-2"
+          }`}
         >
           {group.map((city, idx) => (
-            <div key={idx} className="flex flex-col items-center">
+            <div
+              key={idx}
+              className="flex flex-col items-center h-[50vh] md:w-full"
+            >
               <img
                 src={city.image}
                 alt={city.name}
-                className="object-cover w-full h-40 rounded-md"
+                className="object-cover md:w-full h-[80%] w-[60%] rounded-md"
               />
-              <p className="text-center mt-2 text-sm font-semibold">
+              <p className="text-center mt-2 text-sm text-white bg-black rounded-md bg-opacity-50 font-bold">
                 {city.name}
               </p>
             </div>

@@ -1,5 +1,9 @@
 import React from "react";
 
 export default function Cities() {
-  return <div>Cities</div>;
+  return (
+    <div className="min-h-[36vh]">
+      <p>construction coming soon</p>
+    </div>
+  );
 }
