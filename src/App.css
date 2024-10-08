@@ -6,8 +6,12 @@
 
 @layer utilities {
   .imgbg {
-    background-image: url("./assets/image/top-view.jpg");
+    background-image: url("https://images.unsplash.com/photo-1634850575116-9248e4b917dc?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+  }
+}
 
-    /* Esta línea establece la imagen de fondo */
+@layer components {
+  .bgmain {
+    background-image: url("https://images.unsplash.com/photo-1484271516638-5de1a7e7e5e8?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
   }
 }
