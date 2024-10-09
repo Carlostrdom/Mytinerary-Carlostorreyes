@@ -50,9 +50,9 @@ const CarouselComponent = () => {
     },
     { name: "Barcelona", image: "https://img2.rtve.es/v/868498/" },
     {
-      name: "Rio de Janeiro",
+      name: "Mexico",
       image:
-        "https://images.unsplash.com/photo-1518639192441-8fce0a366e2e?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "https://cdn.pixabay.com/photo/2015/07/20/16/22/mexico-853048_1280.jpg",
     },
     {
       name: "Venezuela",
@@ -80,7 +80,6 @@ const CarouselComponent = () => {
     return () => window.removeEventListener("resize", updateItemsPerGroup);
   }, []);
 
-  // Agrupar ciudades de acuerdo con itemsPerGroup
   const groupedCities = [];
   for (let i = 0; i < cities.length; i += itemsPerGroup) {
     groupedCities.push(cities.slice(i, i + itemsPerGroup));
