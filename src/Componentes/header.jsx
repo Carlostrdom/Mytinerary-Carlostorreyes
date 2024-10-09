@@ -8,7 +8,7 @@ const routes = [
 ];
 
 const burg =
-  "flex flex-col bg-black bg-opacity-70 rounded font-bold p-4 top-[5vh] text-white space-y-2 transition-all duration-300 ease-in-out";
+  "flex flex-col bg-black bg-opacity-70 rounded font-bold p-4 top-[6vh] text-white space-y-2 transition-all duration-300 ease-in-out";
 
 const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -109,6 +109,12 @@ const NavBar = () => {
           </li>
         </ul>
       </nav>
+      {/* Mensaje de viajeros centrado */}
+      <div className="absolute inset-x-0 bottom-10 text-center text-white text-xl font-bold max-w-md mx-auto p-4 bg-opacity-50 bg-black rounded">
+        "Are you ready for an adventure that will change your life? We invite
+        you to an exciting journey to explore some of the most fascinating
+        destinations in the world."
+      </div>
     </header>
   );
 };
