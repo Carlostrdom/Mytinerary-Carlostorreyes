@@ -7,13 +7,13 @@ const Footer = () => {
       <div className="text-center">
         <p>&copy; 2024 MyTinerary. All rights reserved.</p>
         <div className="flex justify-center space-x-4 mt-2">
-          <a href="/path-to-social-media" className="hover:underline">
+          <a href="/*" className="hover:underline">
             Facebook
           </a>
-          <a href="/path-to-social-media" className="hover:underline">
+          <a href="/*" className="hover:underline">
             Instagram
           </a>
-          <a href="/path-to-social-media" className="hover:underline">
+          <a href="/*" className="hover:underline">
             Twitter
           </a>
         </div>
