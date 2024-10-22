@@ -1,11 +1,10 @@
 import React from "react";
+import CityList from "../Componentes/cards";
 
-export default function Cities() {
+export default function City() {
   return (
-    <div className="min-h-[36vh] bgmain items-center">
-      <p className="text-center font-bold text-white">
-        construction coming soon
-      </p>
-    </div>
+    <>
+      <CityList />
+    </>
   );
 }
