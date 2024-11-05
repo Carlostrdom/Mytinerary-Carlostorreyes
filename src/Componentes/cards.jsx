@@ -1,35 +1,24 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchCities,
+  selectCities,
+  setSearch,
+} from "../store/actionCities/actionCities";
 
 const CityList = () => {
-  const [cities, setCities] = useState([]);
-  const [search, setSearch] = useState("");
+  const navigate = useNavigate();
+  const handlerNavigate = (city) => {
+    navigate("/itineraries", { state: city });
+  };
+
+  const { cities, search } = useSelector((state) => state.citiesStore);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    const fetchCities = async () => {
-      try {
-        let cityData;
-        if (search === "") {
-          cityData = await fetch("http://localhost:8080/api/cities/all");
-        } else {
-          cityData = await fetch(
-            `http://localhost:8080/api/cities/all?name=${search}`
-          );
-        }
-
-        const citiesDate = await cityData.json();
-        setCities(citiesDate);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchCities();
+    dispatch(fetchCities(search));
   }, [search]);
-
-  const handleSearch = (e) => {
-    setSearch(e.target.value);
-  };
 
   return (
     <>
@@ -44,16 +33,16 @@ const CityList = () => {
             <input
               type="text"
               value={search}
-              onChange={handleSearch}
+              onChange={(e) => dispatch(setSearch(e.target.value))}
               placeholder="Search city"
               className="w-[200px] p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-red-500"
             />
           </div>
         </div>
 
-        {cities.Response ? (
+        {cities.response ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {cities.Response.map((city) => (
+            {cities.response.map((city) => (
               <div
                 key={city._id}
                 className="bg-blue-100 rounded-lg shadow-lg overflow-hidden transform transition duration-500 hover:scale-105"
@@ -67,9 +56,10 @@ const CityList = () => {
                   <h2 className="text-xl font-semibold">{city.name}</h2>
                   <p> Capital: {city.capital}</p>
                 </div>
-                <Link
-                  to="/details"
+
+                <button
                   className="flex items-center space-x-2 bg-blue-100 text-blue-600 font-semibold py-2 px-4 rounded-lg hover:bg-blue-500 hover:text-white transition duration-300"
+                  onClick={() => handlerNavigate(city)}
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -86,7 +76,7 @@ const CityList = () => {
                     />
                   </svg>
                   <span>Explore Now</span>
-                </Link>
+                </button>
               </div>
             ))}
           </div>

@@ -4,6 +4,7 @@ import "./App.css";
 import StandarLayout from "./layout/StandarLayout";
 import NotFound from "./pages/NotFound";
 import Cities from "./pages/Cities";
+import Itinerary from "./pages/Itinerary";
 
 const router = createBrowserRouter([
   {
@@ -12,9 +13,11 @@ const router = createBrowserRouter([
       { path: "/", element: <Home></Home> },
       { path: "/home", element: <Home></Home> },
       { path: "/cities", element: <Cities></Cities> },
+
       { path: "/*", element: <NotFound></NotFound> },
     ],
   },
+  { path: "/itineraries", element: <Itinerary></Itinerary> },
 ]);
 
 function App() {

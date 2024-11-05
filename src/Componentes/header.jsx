@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import videoSrc from "../assets/image/Black-Simple-Travel-Logo.mp4";
+import { useDispatch } from "react-redux";
+import { fetchCities } from "../store/actionCities/actionCities";
 
 const routes = [
   { to: "/home", text: "Home" },
@@ -11,6 +13,11 @@ const burg =
   "flex flex-col bg-black bg-opacity-70 rounded font-bold p-4 top-[6vh] text-white space-y-2 transition-all duration-300 ease-in-out";
 
 const NavBar = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchCities());
+  }, []);
   const [isOpen, setIsOpen] = useState(false);
 
   const [windowSize, setWindowSize] = useState({
@@ -63,13 +70,13 @@ const NavBar = () => {
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"
-          stroke-width="1.5"
+          strokeWidth="1.5"
           stroke="white"
-          class="size-6"
+          className="size-6"
         >
           <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
             d="M3.75 12h16.5m-16.5 3.75h16.5M3.75 19.5h16.5M5.625 4.5h12.75a1.875 1.875 0 0 1 0 3.75H5.625a1.875 1.875 0 0 1 0-3.75Z"
           />
         </svg>
