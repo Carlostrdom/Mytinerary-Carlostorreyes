@@ -15,7 +15,6 @@ const reduxCities = createReducer(initialState, (builder) => {
     }).addCase(fetchCities.fulfilled, (state, action) => {
         state.loading = false;
         state.cities = action.payload;
-        console.log(action.payload,"reduxxxxxx");
         
     }).addCase(fetchCities.pending, (state) => {
         state.loading = true;

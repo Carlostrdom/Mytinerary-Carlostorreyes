@@ -8,7 +8,7 @@ const Signin = () => {
   const dispatch = useDispatch();
   const signinStore = useSelector((state) => state.signinStore);
   const handleGoogleLogin = () => {
-    window.location.href = "http://localhost:8080/api/auth/signIn/google";
+    window.location.href = "http://localhost:8080/api/auth/signIn/google";    
   };
 
   const loading = signinStore.loading;
@@ -26,7 +26,7 @@ const Signin = () => {
     <>
       <div className="hero-background flex items-center justify-center min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black">
         <form
-          onSubmit={() => handleSubmit()}
+          onSubmit={handleSubmit}
           className="w-full max-w-md p-8 space-y-6 bg-gray-800 rounded-lg shadow-lg"
         >
           <h2 className="text-3xl font-bold text-center text-teal-400">

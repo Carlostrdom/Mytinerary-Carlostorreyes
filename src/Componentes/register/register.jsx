@@ -80,7 +80,7 @@ const RegisterLogin = () => {
   };
 
   return (
-    <div className="hero-background flex items-center justify-center min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black">
+    <div className="flex p-6 items-center justify-center min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black gap-5">
       <form
         onSubmit={handleSubmit}
         className="w-full max-w-md p-8 space-y-6 bg-gray-800 rounded-lg shadow-lg"

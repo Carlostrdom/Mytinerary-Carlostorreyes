@@ -22,10 +22,7 @@ const login = createAsyncThunk("login", async({email,password}) => {
     }
     
     const response = await axios.post("http://localhost:8080/api/auth/signIn",credentials)
-    console.log("Se proceso la solicitud");
-    console.log("Response",response.data);
-    console.log("Superamos la solicitud de Login");
-    
+   
     return response.data
 }) //fullfilled,pending,rejected
 

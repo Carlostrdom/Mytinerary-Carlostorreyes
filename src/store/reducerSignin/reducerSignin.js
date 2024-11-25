@@ -1,6 +1,5 @@
 import { createReducer } from "@reduxjs/toolkit";
 import { login, setUser,logout } from "../actionSignin/actionSignin";
-import { act } from "react";
 
 const initialState = {  
     loading: false,

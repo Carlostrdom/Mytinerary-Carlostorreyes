@@ -21,7 +21,6 @@ const createUser = createAsyncThunk("USER_CREATE", async ({firstName, lastName, 
         const response = await axios.post("http://localhost:8080/api/users/register", user);
 
        
-        console.log(response.data, "pasó la petición");
 
         // Asegúrate de que el servidor devuelve la respuesta esperada
         return response.data;

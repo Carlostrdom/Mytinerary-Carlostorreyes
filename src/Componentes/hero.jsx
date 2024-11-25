@@ -3,6 +3,7 @@ import CarouselComponent from "./carrusel";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import {setUser} from "../store/actionSignin/actionSignin";
 import { useDispatch } from "react-redux";
+import axios from "axios";
 
 const loginWithToken = async (token) => {
   try {
