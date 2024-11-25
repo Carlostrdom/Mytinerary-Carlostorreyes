@@ -4,12 +4,15 @@ import axios from "axios";
 const setSearch = createAction("SET_SEARCH");
 const selectCities = createAction("SELECT_CITIES");
 
-const fetchCities = createAsyncThunk("cities/fetchCities", async (search) => {
+const fetchCities = createAsyncThunk("cities/fetchCities", async (cities) => {
     try {
+    console.log(cities.search
+        ,"cities");
 
-        const url = search
-            ? `http://localhost:8080/api/cities/all?name=${search}`
+        const url = cities.search != ""
+            ? `http://localhost:8080/api/cities/all?search=${cities.search}`
             : "http://localhost:8080/api/cities/all";
+console.log(url,"url estaa");
 
         const response = await axios.get(url);
 

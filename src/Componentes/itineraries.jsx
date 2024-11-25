@@ -37,10 +37,10 @@ const ItinerariesDetail = () => {
   if (error) {
     return <p className="text-red-500">Error: {error}</p>;
   }
-
+ 
   return (
     <div
-      className="relative bg-cover bg-center bg-no-repeat h-[80vh] p-6"
+      className="relative items-center bg-cover bg-center bg-no-repeat min-h-[80vh] p-6"
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
      
@@ -70,7 +70,7 @@ const ItinerariesDetail = () => {
         </div>
       )}
 
-      <div className="flex justify-center items-center gap-6 p-2 rounded-lg">
+      <div className="flex justify-center flex-wrap items-center gap-6 p-2 rounded-lg">
         {itineraries.length === 0 ? (
           <div className="flex flex-col items-center">
             <p className="text-xl font-semibold text-black">
@@ -86,15 +86,34 @@ const ItinerariesDetail = () => {
           itineraries.map((itinerary) => (
             <div
               key={itinerary._id}
-              className="bg-white rounded-lg shadow-lg overflow-hidden transform transition duration-500 hover:scale-105"
+              className="bg-white w-[30vw] rounded-lg shadow-lg overflow-hidden transform transition duration-500 hover:scale-105"
             >
               <img
-                src={itinerary.userPhoto || "https://via.placeholder.com/150"}
+                src={itinerary.photoItinerary || "https://via.placeholder.com/150"}
                 alt={itinerary.userName}
                 className="w-full h-48 object-cover"
               />
               <div className="p-4">
-                <h2 className="text-xl font-semibold">{itinerary.userName}</h2>
+                
+                 {/* Foto de usuario redonda y nombre */}
+                 <div className="flex items-center mb-4">
+        {/* Foto de usuario (si no tienes una URL, usa un marcador de posición) */}
+        
+        <img
+        
+          src={itinerary.user.photoUrl || `https://ui-avatars.com/api/?name=${itinerary.user.firstName}+${itinerary.user.lastName}&background=random&color=fff`}   // Asegúrate de tener la URL de la foto
+          alt={`${itinerary.user.firstName} ${itinerary.user.lastName}`}
+          className="w-12 h-12 rounded-full mr-3"
+        />
+        
+        {/* Nombre del usuario */}
+        <h2 className="text-xl font-semibold">
+          {itinerary.user.firstName} {itinerary.user.lastName}
+        </h2>
+      </div>
+                <span className=" font-semibold mr-2">
+                 Activity: {itinerary.activity} 
+                </span>
                 <div className="itinerary-price flex items-center mb-2">
                   <span className="font-semibold mr-2">Price:</span>
                   {Array.from({ length: itinerary.price }).map((_, index) => (

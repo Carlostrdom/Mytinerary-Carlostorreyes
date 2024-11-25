@@ -8,8 +8,7 @@ const initialItineraryState = {
 };
 
 const reduxItineraries = createReducer(initialItineraryState, (builder) => {
-    builder
-        .addCase(fetchItineraries.pending, (state) => {
+    builder.addCase(fetchItineraries.pending, (state) => {
             state.loading = true;
             state.error = null;
         })

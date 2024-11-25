@@ -1,8 +1,42 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CarouselComponent from "./carrusel";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import {setUser} from "../store/actionSignin/actionSignin";
+import { useDispatch } from "react-redux";
 
+const loginWithToken = async (token) => {
+  try {
+    const response = await axios.get(
+      "http://localhost:8080/api/auth/token",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    
+    return response.data;
+  } catch (error) {
+    console.log("error", error);
+  }
+};
 const Hero = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+ 
+  const params = new URLSearchParams(window.location.search);
+  const token = params.get("token");
+  
+  useEffect(() => {
+    if (token) {
+      localStorage.setItem("token", token);
+      loginWithToken(token).then((user) => {
+        dispatch(setUser({ user, token }));
+      });
+      navigate("/home");
+    }
+  },)
+ 
   return (
     <div className="flex flex-col md:flex-row justify-center bgmain bg-cover bg-center bg-fixed bg-no-repeat items-center text-center w-full p-5 bg-blue-500 text-white">
       <section className="flex flex-col p-4 items-center">

@@ -1,22 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import videoSrc from "../assets/image/Black-Simple-Travel-Logo.mp4";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchCities } from "../store/actionCities/actionCities";
+import {logout}  from "../store/actionSignin/actionSignin";
 
 const routes = [
-  { to: "/home", text: "Home" },
-  { to: "/cities", text: "Cities" },
+  { to: "/home", text: "Home" ,requireAuth: false, unrequireAuth: false },
+  { to: "/cities", text: "Cities", requireAuth: false, unrequireAuth: false},
+  { to: "/register", text: "Register", requireAuth: false, unrequireAuth: true },
+  { to: "/login", text: "Login", requireAuth: false, unrequireAuth: true },
 ];
 
 const burg =
   "flex flex-col bg-black bg-opacity-70 rounded font-bold p-4 top-[6vh] text-white space-y-2 transition-all duration-300 ease-in-out";
 
 const NavBar = () => {
+  const token = useSelector((state) => state.signinStore.token);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchCities());
+    
+
+      dispatch(fetchCities({search: ""}));
+    
   }, []);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -88,13 +96,24 @@ const NavBar = () => {
             isOpen && windowSize.width <= 768 ? burg : "hidden"
           } md:flex md:bg-black md:bg-opacity-50 rounded font-bold p-4 text-white space-y-2 md:space-y-0 md:space-x-4 transition-all duration-300 ease-in-out absolute right-0 top-full mt-2`}
         >
-          {routes.map(({ to, text }) => (
-            <li key={to}>
-              <Link to={to} className="hover:underline">
-                {text}
-              </Link>
-            </li>
-          ))}
+            {routes
+        .filter(
+          ({ requireAuth, unrequireAuth }) =>
+            (!requireAuth || token) && // Mostrar si no requiere autenticación o si hay token
+            (!unrequireAuth || !token) // Mostrar si no requiere estar sin autenticación o si no hay token
+        )
+        .map(({ to, text }) => (
+          <li key={to}>
+            <Link to={to} className="hover:underline">
+              {text}
+            </Link>
+          </li>
+        ))}
+      {token && (
+        <button onClick={() => dispatch(logout())}>
+          Sign Out
+        </button>
+      )}
           <li>
             <h1 className="flex">
               <svg

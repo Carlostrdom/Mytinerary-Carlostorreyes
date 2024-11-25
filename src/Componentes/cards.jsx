@@ -8,6 +8,9 @@ import {
 } from "../store/actionCities/actionCities";
 
 const CityList = () => {
+
+  const token = useSelector((state) => state.signinStore.token);
+
   const navigate = useNavigate();
   const handlerNavigate = (city) => {
     navigate("/itineraries", { state: city });
@@ -17,7 +20,11 @@ const CityList = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchCities(search));
+    if (search != "") {
+      dispatch(fetchCities({search: search})); 
+      console.log(search,"buscado");
+    }
+    
   }, [search]);
 
   return (
