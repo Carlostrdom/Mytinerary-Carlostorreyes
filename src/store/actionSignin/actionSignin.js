@@ -3,8 +3,10 @@ import axios from "axios";
 
 
 const setUser = createAction("setUser", (datos)=>{
+    console.log("datos ya sabes",datos);
+    
     const pay={
-        user:datos.user,
+        user:datos.user || datos.user.user, 
         token:datos.token
     }
     return {        

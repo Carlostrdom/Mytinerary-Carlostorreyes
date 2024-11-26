@@ -32,6 +32,8 @@ const RegisterLogin = () => {
   
   useEffect( ()=> { 
     if(register.user) {
+      console.log(register,"dasdaasdaw");
+      
       dispatch(setUser(register));
       navigate("/home");
     }

@@ -46,6 +46,7 @@ const NavBar = () => {
     window.addEventListener("resize", handleResize);
     handleResize();
   }, []);
+console.log(user);
 
   return (
     <header className="relative bg-cover bg-center bg-no-repeat flex justify-between items-start w-full h-[80vh] text-black p-4">
@@ -116,7 +117,7 @@ const NavBar = () => {
           )}
           {user && (
             <img
-              src={user.user.photoUrl}
+              src={user.photoUrl ? user.photoUrl : user.user.photoUrl}
               alt="User"
               className="w-10 h-10 rounded-full"
             />
